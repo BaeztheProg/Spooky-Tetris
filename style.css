@@ -1,0 +1,19 @@
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+/* center ui and bg */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000;
+}
+
+#tetrisbackground {
+    display: block;
+    width: min(944px, 100vw, calc(100vh - 20px));
+    height: auto;
+}
