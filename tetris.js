@@ -49,4 +49,5 @@ async function drawTetris() {
     }
 }
 
+// call function to draw the board
 drawTetris();
