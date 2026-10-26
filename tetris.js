@@ -82,3 +82,5 @@ function spawnBat() {
 
 // Spawn a bat every 2 seconds
 setInterval(spawnBat, 2000);
+
+drawTetris();
