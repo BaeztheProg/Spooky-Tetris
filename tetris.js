@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById('tetrisbackground');
 const ctx = canvas.getContext('2d');
 
@@ -76,10 +75,10 @@ function spawnBat() {
     const y = Math.random() * (canvas.height - size);
 
     bats.push({ x, y });
-    // Spawn a bat every 2 seconds
-    setInterval(spawnBat, 2000);
+    
+    // Draw the game (this may be shocking but to PLAY the game, you need to SEE it)
+    drawTetris();
 }
 
-// Draw the game (this may be shocking but to PLAY the game, you need to SEE it)
-drawTetris();
-
+// Spawn a bat every 2 seconds
+setInterval(spawnBat, 2000);
