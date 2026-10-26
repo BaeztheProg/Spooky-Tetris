@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('tetrisbackground');
 const ctx = canvas.getContext('2d');
 
@@ -12,14 +13,18 @@ function loadImage(src) {
     });
 }
 
+// Store bats
+const bats = [];
+
 async function drawTetris() {
     try {
+        // Load bg and ui first
         const [background, sprite] = await Promise.all([
             loadImage("assets/bg-placeholder.png"),
             loadImage("assets/tetris-ui.png")
         ]);
 
-        // draw bg first
+        // Clear + redraw bg
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         ctx.drawImage(
@@ -29,13 +34,8 @@ async function drawTetris() {
             canvas.height
         );
 
-        // draw ui second to prevent bugs
-        const padding = 20;
-        const maxWidth = canvas.width - padding * 2;
-        const maxHeight = canvas.height - padding * 2;
-
+        // Draw ui
         const scale = 0.4;
-
         const width = sprite.width * scale;
         const height = sprite.height * scale;
 
@@ -44,10 +44,46 @@ async function drawTetris() {
 
         ctx.drawImage(sprite, x, y, width, height);
 
+        // Load & draw bats 
+        if (bats.length > 0) {
+            try {
+                const batSprite = await loadImage("assets/fat-bat.png");
+
+                for (const bat of bats) {
+                    ctx.drawImage(
+                        batSprite,
+                        bat.x,
+                        bat.y,
+                        40,
+                        40
+                    );
+                }
+            } catch (error) {
+                console.error("cant load bat sprite:", error);
+            }
+        }
+
     } catch (error) {
-        console.error("load failed! assets could not be rendered:", error);
+        console.error("cant load bg or ui:", error);
     }
 }
 
-// call function to draw the board
+// Spawn bats randomly
+function spawnBat() {
+    const size = 40;
+
+    const x = Math.random() * (canvas.width - size);
+    const y = Math.random() * (canvas.height - size);
+
+    bats.push({ x, y });
+
+    drawTetris();
+}
+
+// Draw the initial screen
 drawTetris();
+
+// Spawn a bat every 2 seconds
+setInterval(spawnBat, 2000);
+
+
