@@ -18,10 +18,10 @@ const bats = [];
 
 async function drawTetris() {
     try {
-        // Load bg and ui first
+        // Load bg and board first
         const [background, sprite] = await Promise.all([
             loadImage("assets/bg-placeholder.png"),
-            loadImage("assets/tetris-ui.png")
+            loadImage("assets/tetris-board.png")
         ]);
 
         // Clear + redraw bg
@@ -34,7 +34,7 @@ async function drawTetris() {
             canvas.height
         );
 
-        // Draw ui
+        // Draw board
         const scale = 0.4;
         const width = sprite.width * scale;
         const height = sprite.height * scale;
@@ -77,13 +77,10 @@ function spawnBat() {
 
     bats.push({ x, y });
 
-    drawTetris();
+    // Spawn a bat every 2 seconds
+setInterval(spawnBat, 2000);
 }
 
-// Draw the initial screen
+// Draw the game (this may be shocking but to PLAY the game, you need to SEE it)
 drawTetris();
-
-// Spawn a bat every 2 seconds
-setInterval(spawnBat, 2000);
-
 
