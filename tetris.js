@@ -88,7 +88,7 @@ function spawnBat() {
     const size = 40;
 
     const x = Math.random() * (canvas.width - size);
-    const y = 0;
+    const y = canvas.height-325;
 
     bats.push({ x, y });
     
