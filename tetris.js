@@ -77,7 +77,7 @@ async function init() {
         [background, sprite, batSprite] = await Promise.all([
             loadImage("assets/bg-animated.gif"),
             loadImage("assets/tetris-board.png"),
-            loadImage("assets/fat-bat.png")
+            loadImage("assets/skinny-bat.png")
         ]);
 
         // Initial draw once assets are ready
