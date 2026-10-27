@@ -75,7 +75,7 @@ async function init() {
     try {
         // Preload all assets once so they don't block drawing loops
         [background, sprite, batSprite] = await Promise.all([
-            loadImage("assets/bg-placeholder.png"),
+            loadImage("assets/bg-animated.gif"),
             loadImage("assets/tetris-board.png"),
             loadImage("assets/fat-bat.png")
         ]);
