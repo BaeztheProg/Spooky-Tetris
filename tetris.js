@@ -12,6 +12,26 @@ function loadImage(src) {
     });
 }
 
+//render background
+function loadVideo(src) {
+    return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        
+        video.src = src;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.style.display = 'none';
+
+        video.oncanplaythrough = () => {
+            video.play(); // Explicitly kick off playback
+            resolve(video);
+        };
+        video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
+    });
+}
+
 // Store bats
 const bats = [];
 
@@ -57,12 +77,17 @@ function drawTetris() {
     }
 }
 
+// loop bg
+function animationLoop() {
+    drawTetris();
+    requestAnimationFrame(animationLoop);
+}
+
 // Spawn bats randomly
 function spawnBat() {
     const size = 40;
 
     const x = Math.random() * (canvas.width - size);
-    const y = (canvas.height - size);
 
     bats.push({ x, y });
     
@@ -75,7 +100,7 @@ async function init() {
     try {
         // Preload all assets once so they don't block drawing loops
         [background, sprite, batSprite] = await Promise.all([
-            loadImage("assets/bg-animated.gif"),
+            loadImage("assets/bg-animated-embed.mp4"),
             loadImage("assets/tetris-board.png"),
             loadImage("assets/skinny-bat.png")
         ]);
