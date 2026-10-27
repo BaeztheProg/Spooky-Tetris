@@ -88,6 +88,7 @@ function spawnBat() {
     const size = 40;
 
     const x = Math.random() * (canvas.width - size);
+    const y = 0;
 
     bats.push({ x, y });
     
@@ -100,13 +101,13 @@ async function init() {
     try {
         // Preload all assets once so they don't block drawing loops
         [background, sprite, batSprite] = await Promise.all([
-            loadImage("assets/bg-animated-embed.mp4"),
+            loadVideo("assets/bg-animated-embed.mp4"),
             loadImage("assets/tetris-board.png"),
             loadImage("assets/skinny-bat.png")
         ]);
 
-        // Initial draw once assets are ready
-        drawTetris();
+        // Start continuous animation loop so the video updates live
+        animationLoop();
 
         // Spawn a bat every 2 seconds
         setInterval(spawnBat, 2000);
