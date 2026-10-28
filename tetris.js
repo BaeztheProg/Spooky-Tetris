@@ -84,6 +84,28 @@ function drawTetris() {
             );
         }
     }
+    if (blockSprite && sprite) {
+    const scale = 0.4;
+    const boardWidth = sprite.width * scale;
+    const boardHeight = sprite.height * scale;
+
+    // Calculate top-left pixel corner of board
+    const boardX = (canvas.width - boardWidth) / 2;
+    const boardY = (canvas.height - boardHeight) / 2;
+
+    // Convert grid units to pixel offset on canvas
+    const pixelX = boardX + (gridX * CELL_SIZE);
+    const pixelY = boardY + (gridY * CELL_SIZE);
+
+    // Render 2x2 block (width and height cover 2 grid cells)
+    ctx.drawImage(
+        blockSprite, 
+        pixelX, 
+        pixelY, 
+        CELL_SIZE * 2, 
+        CELL_SIZE * 2
+    );
+}
 }
 
 // loop bg
@@ -113,7 +135,7 @@ async function init() {
             loadVideo("assets/bg-animated-embed.mp4"),
             loadImage("assets/tetris-board.png"),
             loadImage("assets/skinny-bat.png"),
-            loadImage("assets/tetrominoe-1.png")
+            loadImage("assets/tetrominoe-1.png"),
         ]);
 
         // Start continuous animation loop so the video updates live
@@ -125,6 +147,9 @@ async function init() {
     } catch (error) {
         console.error("cant load bg or ui:", error);
     }
+    setInterval(() => {
+    if (cutscene === 0) { // checks cutscene state before moving blocks
+        gridY++}}, 500)
 }
 
 init();
