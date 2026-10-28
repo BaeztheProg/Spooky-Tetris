@@ -1,6 +1,7 @@
 const canvas = document.getElementById('tetrisbackground');
 const ctx = canvas.getContext('2d');
-
+let cutscene=1
+        // the cutscene variable is for when skinny bat or fat bat spawns, so that blocks don't spawn while you watch the bats fall to the ground. when skinny bat or fat bat dies cutscene gets set back to 0 so blocks can continue spawning. however no functionality exists for this variable yet.
 function loadImage(src) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -103,9 +104,7 @@ async function init() {
         [background, sprite, batSprite] = await Promise.all([
             loadVideo("assets/bg-animated-embed.mp4"),
             loadImage("assets/tetris-board.png"),
-            loadImage("assets/skinny-bat.png")
-            let cutscene=1
-        // the cutscene variable is for when skinny bat or fat bat spawns, so that blocks don't spawn while you watch the bats fall to the ground. when skinny bat or fat bat dies cutscene gets set back to 0 so blocks can continue spawning. however no functionality exists for this variable yet.
+            loadImage("assets/skinny-bat.png"),
         ]);
 
         // Start continuous animation loop so the video updates live
