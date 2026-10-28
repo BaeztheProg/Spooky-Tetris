@@ -1,7 +1,15 @@
 const canvas = document.getElementById('tetrisbackground');
 const ctx = canvas.getContext('2d');
-let cutscene=1
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'a' || e.key === 'A') gridX--;
+  if (e.key === 'd' || e.key === 'D') gridX++;
+});
+let cutscene=1;
         // the cutscene variable is for when skinny bat or fat bat spawns, so that blocks don't spawn while you watch the bats fall to the ground. when skinny bat or fat bat dies cutscene gets set back to 0 so blocks can continue spawning. however no functionality exists for this variable yet.
+let blockSprite;
+let gridX = 4; // Initial column position;
+let gridY = 0; // Initial row position (top of board);
+const CELL_SIZE = 5;
 function loadImage(src) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -105,6 +113,7 @@ async function init() {
             loadVideo("assets/bg-animated-embed.mp4"),
             loadImage("assets/tetris-board.png"),
             loadImage("assets/skinny-bat.png"),
+            loadImage("assets/tetrominoe-1.png")
         ]);
 
         // Start continuous animation loop so the video updates live
