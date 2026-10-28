@@ -180,9 +180,10 @@ async function init() {
             loadImage("assets/skinny-bat.png"),
             loadImage("assets/tetrominoe-1.png"),
         ]);
-
+        currentPiece = new gameObject(30, 30, "red", canvas.width/2, 120);
         // Start continuous animation loop so the video updates live
         animationLoop();
+        frame = 0;
         setInterval(movePieceDown,1000);
 
         // Spawn a bat every 2 seconds
